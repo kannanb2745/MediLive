@@ -1,5 +1,5 @@
 // Signup Page JavaScript
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('signupForm');
     const inputs = {
         firstName: document.getElementById('firstName'),
@@ -10,51 +10,71 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPassword: document.getElementById('confirmPassword'),
         agreeTerms: document.getElementById('agreeTerms')
     };
-    
+
     const passwordToggle = document.getElementById('passwordToggle');
     const signupBtn = document.getElementById('signupBtn');
-    
-    // Password toggle
-    passwordToggle.addEventListener('click', function() {
+
+    // 🔹 Password toggle
+    passwordToggle.addEventListener('click', function () {
         const isPassword = inputs.password.type === 'password';
         inputs.password.type = isPassword ? 'text' : 'password';
         passwordToggle.textContent = isPassword ? '🙈' : '👁️';
     });
-    
-    // Form validation
+
+    // 🔹 Field validation on blur/input
     Object.keys(inputs).forEach(field => {
         inputs[field].addEventListener('blur', () => validateField(field));
         inputs[field].addEventListener('input', () => clearError(field));
     });
-    
-    // Form submission
-    form.addEventListener('submit', async function(e) {
+
+    // 🔹 Form submission (only one handler now)
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
+
+        // Validate all fields
         let isValid = true;
         Object.keys(inputs).forEach(field => {
             if (!validateField(field)) isValid = false;
         });
-        
         if (!isValid) return;
-        
+
+        const data = {
+            firstName: inputs.firstName.value.trim(),
+            lastName: inputs.lastName.value.trim(),
+            email: inputs.email.value.trim(),
+            userType: inputs.userType.value.trim(),
+            password: inputs.password.value
+        };
+
         setLoading(true);
-        
+
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            showNotification('Account created successfully! Redirecting...', 'success');
-            setTimeout(() => window.location.href = 'login.html', 1500);
+            const response = await fetch("http://localhost:8080/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.text();
+            if (response.ok) {
+                showNotification("Signup successful! Redirecting...", "success");
+                setTimeout(() => (window.location.href = "/dashboard"), 1500);
+            } else {
+                showNotification(result, "error");
+            }
         } catch (error) {
-            showNotification('Registration failed. Please try again.', 'error');
+            console.error("Error:", error);
+            showNotification("Something went wrong!", "error");
         } finally {
             setLoading(false);
         }
     });
-    
+
+    // 🔹 Validation logic
     function validateField(field) {
         const value = inputs[field].value.trim();
         const errorElement = document.getElementById(field + 'Error');
-        
+
         switch (field) {
             case 'firstName':
             case 'lastName':
@@ -106,29 +126,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 break;
         }
-        
+
         clearError(field);
         return true;
     }
-    
+
     function showError(field, message) {
         const errorElement = document.getElementById(field + 'Error');
         inputs[field].classList.add('error');
         errorElement.textContent = message;
     }
-    
+
     function clearError(field) {
         const errorElement = document.getElementById(field + 'Error');
         inputs[field].classList.remove('error');
         errorElement.textContent = '';
     }
-    
+
     function setLoading(loading) {
         signupBtn.disabled = loading;
         signupBtn.querySelector('.btn-text').style.display = loading ? 'none' : 'block';
         signupBtn.querySelector('.btn-loader').style.display = loading ? 'flex' : 'none';
     }
-    
+
     function showNotification(message, type) {
         const notification = document.createElement('div');
         notification.style.cssText = `
@@ -140,8 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         notification.textContent = message;
         document.body.appendChild(notification);
-        
-        setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+
+        setTimeout(() => (notification.style.transform = 'translateX(0)'), 100);
         setTimeout(() => {
             notification.style.transform = 'translateX(400px)';
             setTimeout(() => notification.remove(), 300);

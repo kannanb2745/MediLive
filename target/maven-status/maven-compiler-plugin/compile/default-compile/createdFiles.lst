@@ -1,3 +1,6 @@
+com/example/auth_backend/model/User.class
 com/example/auth_backend/Controller/PageController.class
+com/example/auth_backend/repository/UserRepository.class
 com/example/auth_backend/config/SecurityConfig.class
+com/example/auth_backend/Controller/AuthController.class
 com/example/auth_backend/AuthBackendApplication.class

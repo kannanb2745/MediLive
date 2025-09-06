@@ -10,7 +10,10 @@ public class PageController {
     public String home() {
         return "index"; // renders index.html in templates
     }
-
+    @GetMapping("/index")
+    public String index(){
+        return "index";
+    }
     @GetMapping("/home")
     public String homePage() {
         return "index"; // renders index.html in templates
@@ -29,5 +32,9 @@ public class PageController {
     @GetMapping("/ai-services")
     public String aiServices() {
         return "ai-services"; // renders ai-services.html
+    }
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "dashboard";
     }
 }

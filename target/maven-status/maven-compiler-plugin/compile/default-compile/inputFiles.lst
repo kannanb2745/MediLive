@@ -1,3 +1,6 @@
 /home/kannan/Spring-Authentication-Project/auth-backend/src/main/java/com/example/auth_backend/AuthBackendApplication.java
+/home/kannan/Spring-Authentication-Project/auth-backend/src/main/java/com/example/auth_backend/Controller/AuthController.java
 /home/kannan/Spring-Authentication-Project/auth-backend/src/main/java/com/example/auth_backend/Controller/PageController.java
 /home/kannan/Spring-Authentication-Project/auth-backend/src/main/java/com/example/auth_backend/config/SecurityConfig.java
+/home/kannan/Spring-Authentication-Project/auth-backend/src/main/java/com/example/auth_backend/model/User.java
+/home/kannan/Spring-Authentication-Project/auth-backend/src/main/java/com/example/auth_backend/repository/UserRepository.java
