@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - MediLive</title>
+    <meta name="description" content="Create your MediLive account - AI-Driven Healthcare Platform">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="signup-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><span>M</span></div>
+                    <span class="logo-text">MediLive</span>
+                </a>
+                <h1>Create Account</h1>
+                <p>Join MediLive for secure healthcare management</p>
+            </div>
+            
+            <form class="signup-form" id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <span class="error-message" id="firstNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <span class="error-message" id="lastNameError"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userType">Account Type</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Select account type</option>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="caretaker">Caretaker</option>
+                        <option value="hospital">Hospital Staff</option>
+                    </select>
+                    <span class="error-message" id="userTypeError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="password-toggle" id="passwordToggle">👁️</button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <span class="error-message" id="confirmPasswordError"></span>
+                </div>
+                <div class="form-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                    <span class="checkmark"></span>
+                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+                <span class="error-message" id="agreeTermsError"></span>
+                </div>
+                <style>
+                    /* Hide default checkbox */
+                    .checkbox-container input[type="checkbox"] {
+                    display: none;
+                    }
+
+                    /* Create a custom checkbox */
+                    .checkbox-container {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    position: relative;
+                    padding-left: 25px; /* space for custom box */
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    }
+
+                    .checkbox-container .checkmark {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 18px;
+                    width: 18px;
+                    background-color: #eee;
+                    border-radius: 4px;
+                    border: 1px solid #aaa;
+                    }
+
+                    /* When checked */
+                    .checkbox-container input[type="checkbox"]:checked + .checkmark {
+                    background-color: #2196F3;
+                    border-color: #2196F3;
+                    }
+
+                    /* Checkmark indicator */
+                    .checkbox-container .checkmark::after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                    }
+
+                    .checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+                    display: block;
+                    }
+
+                    .checkbox-container .checkmark::after {
+                    left: 6px;
+                    top: 2px;
+                    width: 4px;
+                    height: 9px;
+                    border: solid white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                    }
+
+                    /* Forgot password link */
+                    .forgot-password {
+                    margin-left: auto;
+                    font-size: 13px;
+                    text-decoration: none;
+                    color: #2196F3;
+                    }
+
+                    .forgot-password:hover {
+                    text-decoration: underline;
+                    }
+
+                    /* Error message */
+                    .error-message {
+                    font-size: 12px;
+                    color: red;
+                    margin-left: 25px;
+                    display: block;
+                    }
+
+                    /* Links in terms */
+                    .form-group a {
+                    color: #2196F3;
+                    text-decoration: none;
+                    }
+
+                    .form-group a:hover {
+                    text-decoration: underline;
+                    }
+                </style>
+                <!-- <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                    <span class="error-message" id="agreeTermsError"></span>
+                </div> -->
+                
+                <button type="submit" class="btn btn-primary btn-full" id="signupBtn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loader" style="display: none;"><div class="spinner"></div></span>
+                </button>
+                
+                <div class="signup-footer">
+                    <p>Already have an account? <a href="login.html">Sign in here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>
